@@ -30,24 +30,49 @@ class LadderController: UIViewController {
             ref = Database.database().reference()
         }
         
+        //Fetch data & populate cells
         fetchSongs()
     }
 
+    //MARK: Functions
     func fetchSongs() {
         ref?.child("songs").observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let song = Song()
+                var ratio: String?
                 
                 song.name = dictionary["name"] as? String
-                song.rating = dictionary["rating"] as? Int
+                song.elo = dictionary["elo"] as? Int
                 song.wins = dictionary["wins"] as? Int
                 song.losses = dictionary["losses"] as? Int
-                //print(song.name, song.rating, song.wins, song.losses)
+                
+                if song.losses! != 0 && song.wins! == 0 {
+                    ratio = "0%"
+                }
+                
+                if song.losses! == 0 && song.wins! == 0{
+                    ratio = "n/a"
+                }
+                
+                if song.losses! == 0 && song.wins! != 0 {
+                    ratio = "100%"
+                }
+                    
+                if song.losses! != 0 && song.wins! != 0 {
+                    let ratioCalculation = (Double(song.wins!)/((Double(song.wins!)) + (Double(song.losses!))) * 100)
+                    let roundedRatioCalculation = Int(round(ratioCalculation))
+                    ratio = "\(roundedRatioCalculation)%"
+                }
+                
+                song.ratio = ratio
                 
                 self.songs.append(song)
                 
                 DispatchQueue.main.async {
+                    //Sort posts array by elo
+                    self.songs.sort{ $0.elo! > $1.elo! }
+                    //Reload table view cells
                     self.tableView.reloadData()
                 }
                 
@@ -68,6 +93,19 @@ extension LadderController: UITableViewDelegate, UITableViewDataSource {
         
         let rankLabel = cell?.viewWithTag(-1) as? UILabel
         rankLabel?.text = "\(Int(indexPath.row) + 1)"
+        
+        let songLabel = cell?.viewWithTag(1) as? UILabel
+        songLabel?.text = songs[indexPath.row].name
+        
+        let winLossLabel = cell?.viewWithTag(2) as? UILabel
+        let winLossText = "\(songs[indexPath.row].wins ?? 0)/\(songs[indexPath.row].losses ?? 0)"
+        winLossLabel?.text = winLossText
+        
+        let ratioLabel = cell?.viewWithTag(3) as? UILabel
+        ratioLabel?.text = songs[indexPath.row].ratio
+        
+        let eloLabel = cell?.viewWithTag(4) as? UILabel
+        eloLabel?.text = "\(songs[indexPath.row].elo ?? 0)"
         
         return cell!
     }

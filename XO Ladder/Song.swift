@@ -11,8 +11,9 @@ import UIKit
 class Song {
     
     var name: String?
-    var rating: Int?
+    var elo: Int?
     var wins: Int?
     var losses: Int?
-
+    var ratio: String?
+    
 }
