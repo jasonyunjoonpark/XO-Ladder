@@ -38,10 +38,12 @@ class LadderController: UIViewController {
     func fetchSongs() {
         ref?.child("songs").observe(.childAdded, with: { (snapshot) in
             
+            //Cast Firebase data snapshot as dictionary
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let song = Song()
                 var ratio: String?
                 
+                //Store each song's data into Song model
                 song.name = dictionary["name"] as? String
                 song.elo = dictionary["elo"] as? Int
                 song.wins = dictionary["wins"] as? Int
@@ -67,6 +69,7 @@ class LadderController: UIViewController {
                 
                 song.ratio = ratio
                 
+                //Add each song to songs array
                 self.songs.append(song)
                 
                 DispatchQueue.main.async {
