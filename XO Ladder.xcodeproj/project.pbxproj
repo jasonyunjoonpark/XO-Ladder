@@ -8,21 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		0A28F4902084268A006C3BD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28F48F2084268A006C3BD9 /* AppDelegate.swift */; };
-		0A28F4922084268A006C3BD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28F4912084268A006C3BD9 /* ViewController.swift */; };
+		0A28F4922084268A006C3BD9 /* LadderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28F4912084268A006C3BD9 /* LadderController.swift */; };
 		0A28F4952084268A006C3BD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4932084268A006C3BD9 /* Main.storyboard */; };
 		0A28F4972084268C006C3BD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4962084268C006C3BD9 /* Assets.xcassets */; };
 		0A28F49A2084268C006C3BD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4982084268C006C3BD9 /* LaunchScreen.storyboard */; };
+		0A28F4A2208524F3006C3BD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4A1208524F3006C3BD9 /* GoogleService-Info.plist */; };
+		0A62CCA2208529DD0007B22C /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62CCA1208529DD0007B22C /* Song.swift */; };
 		DD73A90EF91F807AEFB49549 /* Pods_XO_Ladder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E110C9DE914F125243FDE6 /* Pods_XO_Ladder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A28F48C2084268A006C3BD9 /* XO Ladder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XO Ladder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A28F48F2084268A006C3BD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A28F4912084268A006C3BD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0A28F4912084268A006C3BD9 /* LadderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderController.swift; sourceTree = "<group>"; };
 		0A28F4942084268A006C3BD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A28F4962084268C006C3BD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A28F4992084268C006C3BD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A28F49B2084268C006C3BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A28F4A1208524F3006C3BD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A62CCA1208529DD0007B22C /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		3AB9BD99186ACBF95CEC9FDC /* Pods-XO Ladder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO Ladder.release.xcconfig"; path = "Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder.release.xcconfig"; sourceTree = "<group>"; };
 		75E110C9DE914F125243FDE6 /* Pods_XO_Ladder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XO_Ladder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2096F18959C736A2DFB72C2 /* Pods-XO Ladder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO Ladder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -70,11 +74,13 @@
 			isa = PBXGroup;
 			children = (
 				0A28F48F2084268A006C3BD9 /* AppDelegate.swift */,
-				0A28F4912084268A006C3BD9 /* ViewController.swift */,
+				0A28F4912084268A006C3BD9 /* LadderController.swift */,
+				0A62CCA1208529DD0007B22C /* Song.swift */,
 				0A28F4932084268A006C3BD9 /* Main.storyboard */,
 				0A28F4962084268C006C3BD9 /* Assets.xcassets */,
 				0A28F4982084268C006C3BD9 /* LaunchScreen.storyboard */,
 				0A28F49B2084268C006C3BD9 /* Info.plist */,
+				0A28F4A1208524F3006C3BD9 /* GoogleService-Info.plist */,
 			);
 			path = "XO Ladder";
 			sourceTree = "<group>";
@@ -152,6 +158,7 @@
 				0A28F49A2084268C006C3BD9 /* LaunchScreen.storyboard in Resources */,
 				0A28F4972084268C006C3BD9 /* Assets.xcassets in Resources */,
 				0A28F4952084268A006C3BD9 /* Main.storyboard in Resources */,
+				0A28F4A2208524F3006C3BD9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +229,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A28F4922084268A006C3BD9 /* ViewController.swift in Sources */,
+				0A62CCA2208529DD0007B22C /* Song.swift in Sources */,
+				0A28F4922084268A006C3BD9 /* LadderController.swift in Sources */,
 				0A28F4902084268A006C3BD9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,7 +379,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KJCGPLSA62;
 				INFOPLIST_FILE = "XO Ladder/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jasonpark.XO-Ladder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -387,7 +398,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KJCGPLSA62;
 				INFOPLIST_FILE = "XO Ladder/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jasonpark.XO-Ladder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

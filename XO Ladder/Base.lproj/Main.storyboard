@@ -30,7 +30,7 @@
         <!--XO Ladder-->
         <scene sceneID="fJz-1T-vCw">
             <objects>
-                <viewController id="UjT-8H-fo7" sceneMemberID="viewController">
+                <viewController id="UjT-8H-fo7" customClass="LadderController" customModule="XO_Ladder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mB5-ye-aNt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
