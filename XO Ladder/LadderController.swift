@@ -15,9 +15,16 @@ class LadderController: UIViewController {
     var ref: DatabaseReference?
     var songs = [Song]()
 
+    //MARK: Outlets
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Delegates
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         //Check if user is signed into Firebase
         if let uid = Auth.auth().currentUser?.uid {
             ref = Database.database().reference()
@@ -41,12 +48,29 @@ class LadderController: UIViewController {
                 self.songs.append(song)
                 
                 DispatchQueue.main.async {
-                    
+                    self.tableView.reloadData()
                 }
                 
             }
         })
     }
 
+}
+
+extension LadderController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return songs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+        
+        let rankLabel = cell?.viewWithTag(-1) as? UILabel
+        rankLabel?.text = "\(Int(indexPath.row) + 1)"
+        
+        return cell!
+    }
+    
 }
 
