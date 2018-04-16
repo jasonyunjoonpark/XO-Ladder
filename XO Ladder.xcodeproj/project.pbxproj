@@ -12,6 +12,7 @@
 		0A28F4952084268A006C3BD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4932084268A006C3BD9 /* Main.storyboard */; };
 		0A28F4972084268C006C3BD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4962084268C006C3BD9 /* Assets.xcassets */; };
 		0A28F49A2084268C006C3BD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4982084268C006C3BD9 /* LaunchScreen.storyboard */; };
+		DD73A90EF91F807AEFB49549 /* Pods_XO_Ladder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E110C9DE914F125243FDE6 /* Pods_XO_Ladder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		0A28F4962084268C006C3BD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A28F4992084268C006C3BD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A28F49B2084268C006C3BD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AB9BD99186ACBF95CEC9FDC /* Pods-XO Ladder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO Ladder.release.xcconfig"; path = "Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder.release.xcconfig"; sourceTree = "<group>"; };
+		75E110C9DE914F125243FDE6 /* Pods_XO_Ladder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XO_Ladder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2096F18959C736A2DFB72C2 /* Pods-XO Ladder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO Ladder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD73A90EF91F807AEFB49549 /* Pods_XO_Ladder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		046095533B34EDF339D4FB45 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75E110C9DE914F125243FDE6 /* Pods_XO_Ladder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0A28F4832084268A006C3BD9 = {
 			isa = PBXGroup;
 			children = (
 				0A28F48E2084268A006C3BD9 /* XO Ladder */,
 				0A28F48D2084268A006C3BD9 /* Products */,
+				BE95AA459CD26DA36713AD1E /* Pods */,
+				046095533B34EDF339D4FB45 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +79,15 @@
 			path = "XO Ladder";
 			sourceTree = "<group>";
 		};
+		BE95AA459CD26DA36713AD1E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E2096F18959C736A2DFB72C2 /* Pods-XO Ladder.debug.xcconfig */,
+				3AB9BD99186ACBF95CEC9FDC /* Pods-XO Ladder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A28F49E2084268C006C3BD9 /* Build configuration list for PBXNativeTarget "XO Ladder" */;
 			buildPhases = (
+				DAC94881F9BCEBB768A95C56 /* [CP] Check Pods Manifest.lock */,
 				0A28F4882084268A006C3BD9 /* Sources */,
 				0A28F4892084268A006C3BD9 /* Frameworks */,
 				0A28F48A2084268A006C3BD9 /* Resources */,
+				240C405C4BFCB549D9FA7423 /* [CP] Embed Pods Frameworks */,
+				AF536E0E99E3B890D82B7677 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		240C405C4BFCB549D9FA7423 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF536E0E99E3B890D82B7677 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAC94881F9BCEBB768A95C56 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XO Ladder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0A28F4882084268A006C3BD9 /* Sources */ = {
@@ -278,15 +365,13 @@
 		};
 		0A28F49F2084268C006C3BD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2096F18959C736A2DFB72C2 /* Pods-XO Ladder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KJCGPLSA62;
 				INFOPLIST_FILE = "XO Ladder/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jasonpark.XO-Ladder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -296,15 +381,13 @@
 		};
 		0A28F4A02084268C006C3BD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AB9BD99186ACBF95CEC9FDC /* Pods-XO Ladder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KJCGPLSA62;
 				INFOPLIST_FILE = "XO Ladder/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jasonpark.XO-Ladder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

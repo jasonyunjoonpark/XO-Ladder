@@ -1,0 +1,6 @@
+framework module Pods_XO_Ladder {
+  umbrella header "Pods-XO Ladder-umbrella.h"
+
+  export *
+  module * { export * }
+}
