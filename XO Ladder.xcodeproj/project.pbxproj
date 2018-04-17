@@ -15,6 +15,7 @@
 		0A28F4A2208524F3006C3BD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A28F4A1208524F3006C3BD9 /* GoogleService-Info.plist */; };
 		0A62CCA2208529DD0007B22C /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62CCA1208529DD0007B22C /* Song.swift */; };
 		0ADE4E392085712D00576775 /* VoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADE4E382085712D00576775 /* VoteController.swift */; };
+		0ADE4E3B20867E1E00576775 /* VoteController+EloManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADE4E3A20867E1E00576775 /* VoteController+EloManager.swift */; };
 		DD73A90EF91F807AEFB49549 /* Pods_XO_Ladder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E110C9DE914F125243FDE6 /* Pods_XO_Ladder.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		0A28F4A1208524F3006C3BD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A62CCA1208529DD0007B22C /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		0ADE4E382085712D00576775 /* VoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteController.swift; sourceTree = "<group>"; };
+		0ADE4E3A20867E1E00576775 /* VoteController+EloManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VoteController+EloManager.swift"; sourceTree = "<group>"; };
 		3AB9BD99186ACBF95CEC9FDC /* Pods-XO Ladder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO Ladder.release.xcconfig"; path = "Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder.release.xcconfig"; sourceTree = "<group>"; };
 		75E110C9DE914F125243FDE6 /* Pods_XO_Ladder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XO_Ladder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2096F18959C736A2DFB72C2 /* Pods-XO Ladder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO Ladder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XO Ladder/Pods-XO Ladder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,17 +77,66 @@
 		0A28F48E2084268A006C3BD9 /* XO Ladder */ = {
 			isa = PBXGroup;
 			children = (
-				0A28F48F2084268A006C3BD9 /* AppDelegate.swift */,
+				0A7120972086A70D00FB09EC /* App Delegate */,
+				0A7120952086A6F800FB09EC /* Controllers */,
+				0A7120962086A70500FB09EC /* Models */,
+				0A7120982086A72600FB09EC /* Storyboards */,
+				0A7120992086A73E00FB09EC /* Assets */,
+				0A71209A2086A74500FB09EC /* Supporting Files */,
+			);
+			path = "XO Ladder";
+			sourceTree = "<group>";
+		};
+		0A7120952086A6F800FB09EC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				0A28F4912084268A006C3BD9 /* LadderController.swift */,
-				0A62CCA1208529DD0007B22C /* Song.swift */,
 				0ADE4E382085712D00576775 /* VoteController.swift */,
+				0ADE4E3A20867E1E00576775 /* VoteController+EloManager.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0A7120962086A70500FB09EC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0A62CCA1208529DD0007B22C /* Song.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0A7120972086A70D00FB09EC /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				0A28F48F2084268A006C3BD9 /* AppDelegate.swift */,
+			);
+			path = "App Delegate";
+			sourceTree = "<group>";
+		};
+		0A7120982086A72600FB09EC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
 				0A28F4932084268A006C3BD9 /* Main.storyboard */,
-				0A28F4962084268C006C3BD9 /* Assets.xcassets */,
 				0A28F4982084268C006C3BD9 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		0A7120992086A73E00FB09EC /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0A28F4962084268C006C3BD9 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		0A71209A2086A74500FB09EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				0A28F49B2084268C006C3BD9 /* Info.plist */,
 				0A28F4A1208524F3006C3BD9 /* GoogleService-Info.plist */,
 			);
-			path = "XO Ladder";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		BE95AA459CD26DA36713AD1E /* Pods */ = {
@@ -235,6 +286,7 @@
 				0A62CCA2208529DD0007B22C /* Song.swift in Sources */,
 				0ADE4E392085712D00576775 /* VoteController.swift in Sources */,
 				0A28F4922084268A006C3BD9 /* LadderController.swift in Sources */,
+				0ADE4E3B20867E1E00576775 /* VoteController+EloManager.swift in Sources */,
 				0A28F4902084268A006C3BD9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
