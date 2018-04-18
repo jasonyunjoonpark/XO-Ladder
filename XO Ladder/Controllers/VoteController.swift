@@ -16,6 +16,8 @@ class VoteController: UIViewController {
     var songs = [Song]()
     var firstSongName = ""
     var secondSongName = ""
+    var firstSong = Song()
+    var secondSong = Song()
     var sOne: Double = 0.0
     var sTwo: Double = 0.0
     
@@ -51,46 +53,58 @@ class VoteController: UIViewController {
         }
         
     }
+    // 2687, newSongRatingTwo: 1917
+    // 2703, newSongRatingTwo: 1917)
+    
+    //Morning 1918 (top) vs High For This  2703 (bot) ->
+    //         1949                        2687
+    
+    //The Morning 1918
+    //High For This 2703
+    //(newSongRatingOne: 1917, newSongRatingTwo: 2703)
+    
     
     //MARK: Obj-C Handlers
     @objc func topViewClicked() {
         print("Top clicked!")
+        sOne = 1.0
+        sTwo = 0.0
         
         //Remove both gestures recognizers
         removeGestureRecognizers()
         
         //Update Firebase data with new elos, new wins, new losses
-        self.ref?.child("songs").child(firstSongName).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot)
-            
-            //Cast Firebase data snapshot as dictionary
-            if let firstSongDictionary = snapshot.value as? [String: AnyObject] {
-                
-                let firstSong = Song()
-                
-                firstSong.name = firstSongDictionary["name"] as! String
-                firstSong.elo = firstSongDictionary["elo"] as! Int
-                firstSong.wins = firstSongDictionary["wins"] as! Int
-                firstSong.losses = firstSongDictionary["losses"] as! Int
-                
-                print(firstSong.name!, firstSong.elo!, firstSong.wins!, firstSong.losses!)
-
-            }
-        })
+        fetchTwoSongs {
+            print(self.firstSong.name!, self.firstSong.elo!)
+            print(self.secondSong.name!, self.secondSong.elo!)
+            let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
+            self.firstSong.elo = tuple.newSongRatingOne
+            self.secondSong.elo = tuple.newSongRatingTwo
+        }
         
     }
     
     @objc func bottomViewClicked() {
         print("Bottom clicked!")
+        sOne = 0.0
+        sTwo = 1.0
         
         //Remove both gestures recognizers
         removeGestureRecognizers()
         
+        //Update Firebase data with new elos, new wins, new losses
+        fetchTwoSongs {
+            print(self.firstSong.name!, self.firstSong.elo!)
+            print(self.secondSong.name!, self.secondSong.elo!)
+            let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
+            self.firstSong.elo = tuple.newSongRatingOne
+            self.secondSong.elo = tuple.newSongRatingTwo
+        }
     }
     
     //MARK: Functions
     func fetchSongs(completed: @escaping ()->()) {
-        self.ref?.child("songs").observe(.value, with: { (snapshot) in
+        self.ref?.child("songs").observeSingleEvent(of: .value, with: { (snapshot) in
             
             print(snapshot)
             
@@ -102,17 +116,41 @@ class VoteController: UIViewController {
                     var ratio: String?
                     
                     song.name = key as! String
-                    //song.elo = value["elo"] as! Int
-                    //song.wins = value["wins"] as! Int
-                    //song.losses = value ["losses"] as! Int
-                    //print(song.name!, song.elo!, song.wins!, song.losses!)
                     
-                    //Append each song object to songs array
                     self.songs.append(song)
                 }
             }
             completed()
         })
+    }
+    
+    func fetchTwoSongs(completed: @escaping ()->()) {
+        //Fetch first song data
+        self.ref?.child("songs").child(firstSongName).observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot)
+            //Cast Firebase data snapshot as dictionary
+            if let firstSongDictionary = snapshot.value as? [String: AnyObject] {
+                self.firstSong.name = firstSongDictionary["name"] as! String
+                self.firstSong.elo = firstSongDictionary["elo"] as! Int
+                self.firstSong.wins = firstSongDictionary["wins"] as! Int
+                self.firstSong.losses = firstSongDictionary["losses"] as! Int
+                
+                //Fetch second song data
+                self.ref?.child("songs").child(self.secondSongName).observeSingleEvent(of: .value, with: { (snapshot) in
+                    print(snapshot)
+                    //Cast Firebase data snapshot as dictionary
+                    if let secondSongDictionary = snapshot.value as? [String: AnyObject] {
+                        self.secondSong.name = secondSongDictionary["name"] as! String
+                        self.secondSong.elo = secondSongDictionary["elo"] as! Int
+                        self.secondSong.wins = secondSongDictionary["wins"] as! Int
+                        self.secondSong.losses = secondSongDictionary["losses"] as! Int
+                    }
+                    completed()
+                })
+            }
+            
+        })
+
     }
     
     func generateNewSongPair() {
@@ -123,9 +161,6 @@ class VoteController: UIViewController {
         let filteredArrayWithoutFirstSong = songs.filter { $0.name != firstSongName }
         secondSongName = filteredArrayWithoutFirstSong.randomElement()!.name!
         
-        print(filteredArrayWithoutFirstSong)
-        print(firstSongName, secondSongName)
-        
         //Update UI
         firstSongLabel.text = firstSongName
         secondSongLabel.text = secondSongName
@@ -135,8 +170,7 @@ class VoteController: UIViewController {
         let bottomViewGesture = UITapGestureRecognizer(target: self, action: #selector(bottomViewClicked))
         self.topView.addGestureRecognizer(topViewGesture)
         self.bottomView.addGestureRecognizer(bottomViewGesture)
-        
-        
+    
     }
     
     func removeGestureRecognizers() {
