@@ -84,29 +84,34 @@ class VoteController: UIViewController {
         
         //Update Firebase data with new elos, new wins, new losses
         fetchTwoSongs {
-            let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
-            self.firstSong.elo = tuple.newSongRatingOne
-            self.firstSong.wins! += 1
-            self.secondSong.elo = tuple.newSongRatingTwo
-            self.secondSong.losses! += 1
             
-            //Update Top & Bottom Views UI after clicked
-            self.firstSongLabel.isHidden = true
-            self.topVotedView.isHidden = false
-            self.topVotedViewSongLabel.text = self.firstSongName
-            self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
-            
-            self.secondSongLabel.isHidden = true
-            self.bottomVotedView.isHidden = false
-            self.bottomVotedViewSongLabel.text = self.secondSongName
-            self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
-            
-            //Update Next Button UI
-            self.nextButton.isHidden = false
-            self.nextButtonDisabledView.isHidden = true
+            //Calculate and update both song objects after top clicked
+            self.calculateAndUpdateBothSongObjectsAfterTopClicked {
+                
+                //Update both songs' data in Firebase
+                self.updateBothSongsDataOnFirebase {
+                    //Update Top & Bottom Views UI after clicked
+                    self.firstSongLabel.isHidden = true
+                    self.topVotedView.isHidden = false
+                    self.topVotedViewSongLabel.text = self.firstSongName
+                    self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
+                    self.topVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
+                    
+                    self.secondSongLabel.isHidden = true
+                    self.bottomVotedView.isHidden = false
+                    self.bottomVotedViewSongLabel.text = self.secondSongName
+                    self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
+                    self.bottomVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
+                    
+                    //Update Next Button UI
+                    self.nextButton.isHidden = false
+                    self.nextButtonDisabledView.isHidden = true
+                }
+
+            }
             
         }
-        
+    
     }
     
     @objc func bottomViewClicked() {
@@ -119,30 +124,30 @@ class VoteController: UIViewController {
         
         //Update Firebase data with new elos, new wins, new losses
         fetchTwoSongs {
-            print(self.firstSong.name!, self.firstSong.elo!)
-            print(self.secondSong.name!, self.secondSong.elo!)
-            let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
-            self.firstSong.elo = tuple.newSongRatingOne
-            self.firstSong.losses! += 1
-            self.secondSong.elo = tuple.newSongRatingTwo
-            self.secondSong.wins! += 1
             
-            //Update UI after clicked
-            self.firstSongLabel.isHidden = true
-            self.topVotedView.isHidden = false
-            self.topVotedViewSongLabel.text = self.firstSongName
-            self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
-            
-            self.secondSongLabel.isHidden = true
-            self.bottomVotedView.isHidden = false
-            self.bottomVotedViewSongLabel.text = self.secondSongName
-            self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
-            
-            //Update Next Button UI
-            self.nextButton.isHidden = false
-            self.nextButtonDisabledView.isHidden = true
-
-            
+            //Calculate and update both song objects after bottom clicked
+            self.calculateAndUpdateBothSongObjectsAfterBottomClicked {
+                
+                //Update both songs' data in Firebase
+                self.updateBothSongsDataOnFirebase {
+                    //Update UI after clicked
+                    self.firstSongLabel.isHidden = true
+                    self.topVotedView.isHidden = false
+                    self.topVotedViewSongLabel.text = self.firstSongName
+                    self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
+                    self.topVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
+                    
+                    self.secondSongLabel.isHidden = true
+                    self.bottomVotedView.isHidden = false
+                    self.bottomVotedViewSongLabel.text = self.secondSongName
+                    self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
+                    self.bottomVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
+                    
+                    //Update Next Button UI
+                    self.nextButton.isHidden = false
+                    self.nextButtonDisabledView.isHidden = true
+                }
+            }
         }
     }
     
@@ -225,6 +230,43 @@ class VoteController: UIViewController {
         }
     }
     
+    func calculateAndUpdateBothSongObjectsAfterTopClicked(completed: @escaping ()->()) {
+        let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
+        self.firstSong.elo = tuple.newSongRatingOne
+        self.firstSong.wins! += 1
+        self.secondSong.elo = tuple.newSongRatingTwo
+        self.secondSong.losses! += 1
+        
+        DispatchQueue.main.async {
+            completed()
+        }
+    }
+    
+    func calculateAndUpdateBothSongObjectsAfterBottomClicked(completed: @escaping ()->()) {
+        let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
+        self.firstSong.elo = tuple.newSongRatingOne
+        self.firstSong.losses! += 1
+        self.secondSong.elo = tuple.newSongRatingTwo
+        self.secondSong.wins! += 1
+        
+        DispatchQueue.main.async {
+            completed()
+        }
+    }
+    
+    func updateBothSongsDataOnFirebase(completed: @escaping ()-> ()) {
+        self.ref?.child("songs").child(self.firstSongName).updateChildValues(["elo": self.firstSong.elo!,
+                                                                              "wins": self.firstSong.wins!,
+                                                                              "losses": self.firstSong.losses!])
+        self.ref?.child("songs").child(self.secondSongName).updateChildValues(["elo": self.secondSong.elo!,
+                                                                               "wins": self.secondSong.wins!,
+                                                                               "losses": self.secondSong.losses!])
+        
+        DispatchQueue.main.async {
+            completed()
+        }
+    }
+
     
     
 }

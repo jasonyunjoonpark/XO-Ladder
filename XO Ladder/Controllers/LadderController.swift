@@ -14,13 +14,19 @@ class LadderController: UIViewController {
     //MARK: Global Variables
     var ref: DatabaseReference?
     var songs = [Song]()
+    var refresher: UIRefreshControl!
 
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Refreshing ladder...")
+        refresher.addTarget(self, action: #selector(LadderController.fetchSongsSelector), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
+        
         //Delegates
         tableView.delegate = self
         tableView.dataSource = self
@@ -31,11 +37,68 @@ class LadderController: UIViewController {
         }
         
         //Fetch data & populate cells
-        fetchSongs()
+        fetchSongs {
+            
+        }
     }
 
+    @objc func fetchSongsSelector() {
+        self.songs = []
+        fetchSongs {
+            self.refresher.endRefreshing()
+        }
+    }
+    
     //MARK: Functions
-    func fetchSongs() {
+    func fetchSongs(completed: @escaping ()->()) {
+        self.ref?.child("songs").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            //Cast Firebase data snapshot as dictionary
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                for (key, value) in dictionary {
+                    let song = Song()
+                    var ratio: String?
+                    
+                    song.name = key as! String
+                    song.elo = value["elo"] as! Int
+                    song.wins = value["wins"] as! Int
+                    song.losses = value["losses"] as! Int
+                    
+                    if song.losses! != 0 && song.wins! == 0 {
+                        ratio = "0%"
+                    }
+                    
+                    if song.losses! == 0 && song.wins! == 0{
+                        ratio = "n/a"
+                    }
+                    
+                    if song.losses! == 0 && song.wins! != 0 {
+                        ratio = "100%"
+                    }
+                    
+                    if song.losses! != 0 && song.wins! != 0 {
+                        let ratioCalculation = (Double(song.wins!)/((Double(song.wins!)) + (Double(song.losses!))) * 100)
+                        let roundedRatioCalculation = Int(round(ratioCalculation))
+                        ratio = "\(roundedRatioCalculation)%"
+                    }
+                    
+                    song.ratio = ratio
+                    self.songs.append(song)
+                    
+                    DispatchQueue.main.async {
+                        //Sort posts array by elo
+                        self.songs.sort{ $0.elo! > $1.elo! }
+                        //Reload table view cells
+                        self.tableView.reloadData()
+                    }
+                }
+                completed()
+            }
+        })
+    }
+
+    @objc func fetchSongs2() {
         ref?.child("songs").observe(.childAdded, with: { (snapshot) in
             
             //Cast Firebase data snapshot as dictionary
@@ -78,11 +141,10 @@ class LadderController: UIViewController {
                     //Reload table view cells
                     self.tableView.reloadData()
                 }
-                
             }
         })
     }
-
+    
 }
 
 extension LadderController: UITableViewDelegate, UITableViewDataSource {
