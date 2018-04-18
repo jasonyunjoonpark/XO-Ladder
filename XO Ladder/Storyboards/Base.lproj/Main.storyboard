@@ -235,10 +235,16 @@
                     <navigationItem key="navigationItem" title="Vote" id="2bS-Hk-5Yg"/>
                     <connections>
                         <outlet property="bottomView" destination="hPl-vy-Tka" id="JVz-sX-X2J"/>
+                        <outlet property="bottomVotedView" destination="HTX-t9-G1n" id="P6J-7q-0UV"/>
+                        <outlet property="bottomVotedViewEloNumberLabel" destination="8wl-EF-yzF" id="tRn-6E-Yfl"/>
+                        <outlet property="bottomVotedViewSongLabel" destination="9mS-ua-tL3" id="DGw-IM-x0L"/>
                         <outlet property="firstSongLabel" destination="FTv-4N-Vj1" id="Gzw-rZ-taB"/>
                         <outlet property="nextButton" destination="9Pq-Hk-hzy" id="p9C-0a-7B2"/>
                         <outlet property="secondSongLabel" destination="f6S-WX-SNg" id="Vdg-xb-8MQ"/>
                         <outlet property="topView" destination="CO2-Vs-ri1" id="HVB-m6-jcd"/>
+                        <outlet property="topVotedView" destination="WSG-EB-uZt" id="vm5-ft-wRH"/>
+                        <outlet property="topVotedViewEloNumberLabel" destination="GBL-jD-Zi8" id="gxk-XO-6t8"/>
+                        <outlet property="topVotedViewSongLabel" destination="cxa-PI-Mcp" id="27l-fk-nUq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDu-N8-Cze" userLabel="First Responder" sceneMemberID="firstResponder"/>

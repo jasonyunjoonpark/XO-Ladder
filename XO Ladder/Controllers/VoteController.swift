@@ -24,14 +24,28 @@ class VoteController: UIViewController {
     //MARK: Outlets
     @IBOutlet weak var firstSongLabel: UILabel!
     @IBOutlet weak var secondSongLabel: UILabel!
+    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var topVotedView: UIView!
+    @IBOutlet weak var topVotedViewSongLabel: UILabel!
+    @IBOutlet weak var topVotedViewEloNumberLabel: UILabel!
+    
+    @IBOutlet weak var bottomVotedView: UIView!
+    @IBOutlet weak var bottomVotedViewSongLabel: UILabel!
+    @IBOutlet weak var bottomVotedViewEloNumberLabel: UILabel!
+    
     //MARK: IBActions
     @IBAction func nextButtonClicked(_ sender: Any) {
         generateNewSongPair()
-
+        
+        self.firstSongLabel.isHidden = false
+        topVotedView.isHidden = true
+        self.secondSongLabel.isHidden = false
+        bottomVotedView.isHidden = true
+        
     }
     
     //MARK: View Did Load
@@ -39,7 +53,7 @@ class VoteController: UIViewController {
         super.viewDidLoad()
         
         //Setup intial next button
-        nextButton.isEnabled = false
+        nextButton.isEnabled = true
         nextButton.titleLabel?.text = "Or"
         
         //Check if user is signed into Firebase
@@ -53,16 +67,6 @@ class VoteController: UIViewController {
         }
         
     }
-    // 2687, newSongRatingTwo: 1917
-    // 2703, newSongRatingTwo: 1917)
-    
-    //Morning 1918 (top) vs High For This  2703 (bot) ->
-    //         1949                        2687
-    
-    //The Morning 1918
-    //High For This 2703
-    //(newSongRatingOne: 1917, newSongRatingTwo: 2703)
-    
     
     //MARK: Obj-C Handlers
     @objc func topViewClicked() {
@@ -75,11 +79,25 @@ class VoteController: UIViewController {
         
         //Update Firebase data with new elos, new wins, new losses
         fetchTwoSongs {
-            print(self.firstSong.name!, self.firstSong.elo!)
-            print(self.secondSong.name!, self.secondSong.elo!)
             let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
             self.firstSong.elo = tuple.newSongRatingOne
+            self.firstSong.wins! += 1
             self.secondSong.elo = tuple.newSongRatingTwo
+            self.secondSong.losses! += 1
+            
+            //Update UI after clicked
+            self.firstSongLabel.isHidden = true
+            self.topVotedView.isHidden = false
+            self.topVotedViewSongLabel.text = self.firstSongName
+            self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
+            
+            self.secondSongLabel.isHidden = true
+            self.bottomVotedView.isHidden = false
+            self.bottomVotedViewSongLabel.text = self.secondSongName
+            self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
+            
+            print(self.firstSong.name!, self.firstSong.wins!, self.firstSong.losses!)
+            print(self.secondSong.name!, self.secondSong.wins!, self.secondSong.losses!)
         }
         
     }
@@ -98,15 +116,30 @@ class VoteController: UIViewController {
             print(self.secondSong.name!, self.secondSong.elo!)
             let tuple = self.calculateNewElos(songRatingOne: self.firstSong.elo!, songRatingTwo: self.secondSong.elo!)
             self.firstSong.elo = tuple.newSongRatingOne
+            self.firstSong.losses! += 1
             self.secondSong.elo = tuple.newSongRatingTwo
+            self.secondSong.wins! += 1
+            
+            //Update UI after clicked
+            self.firstSongLabel.isHidden = true
+            self.topVotedView.isHidden = false
+            self.topVotedViewSongLabel.text = self.firstSongName
+            self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
+            
+            self.secondSongLabel.isHidden = true
+            self.bottomVotedView.isHidden = false
+            self.bottomVotedViewSongLabel.text = self.secondSongName
+            self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
+            
+            print(self.firstSong.name!, self.firstSong.wins!, self.firstSong.losses!)
+            print(self.secondSong.name!, self.secondSong.wins!, self.secondSong.losses!)
+            
         }
     }
     
     //MARK: Functions
     func fetchSongs(completed: @escaping ()->()) {
         self.ref?.child("songs").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            print(snapshot)
             
             //Cast Firebase data snapshot as dictionary
             if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -127,7 +160,6 @@ class VoteController: UIViewController {
     func fetchTwoSongs(completed: @escaping ()->()) {
         //Fetch first song data
         self.ref?.child("songs").child(firstSongName).observeSingleEvent(of: .value, with: { (snapshot) in
-            print(snapshot)
             //Cast Firebase data snapshot as dictionary
             if let firstSongDictionary = snapshot.value as? [String: AnyObject] {
                 self.firstSong.name = firstSongDictionary["name"] as! String
@@ -137,7 +169,6 @@ class VoteController: UIViewController {
                 
                 //Fetch second song data
                 self.ref?.child("songs").child(self.secondSongName).observeSingleEvent(of: .value, with: { (snapshot) in
-                    print(snapshot)
                     //Cast Firebase data snapshot as dictionary
                     if let secondSongDictionary = snapshot.value as? [String: AnyObject] {
                         self.secondSong.name = secondSongDictionary["name"] as! String
@@ -166,11 +197,14 @@ class VoteController: UIViewController {
         secondSongLabel.text = secondSongName
         
         //Add tap gesture for uiviews
+        addGestureRecognizers()
+    }
+    
+    func addGestureRecognizers() {
         let topViewGesture = UITapGestureRecognizer(target: self, action:  #selector(topViewClicked))
         let bottomViewGesture = UITapGestureRecognizer(target: self, action: #selector(bottomViewClicked))
         self.topView.addGestureRecognizer(topViewGesture)
         self.bottomView.addGestureRecognizer(bottomViewGesture)
-    
     }
     
     func removeGestureRecognizers() {
