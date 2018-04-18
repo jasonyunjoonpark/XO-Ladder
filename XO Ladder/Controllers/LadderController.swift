@@ -22,8 +22,10 @@ class LadderController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Add refresh control
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString(string: "Refreshing ladder...")
+        refresher.tintColor = .white
+        refresher.attributedTitle = NSAttributedString(string: "Refreshing ladder...", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         refresher.addTarget(self, action: #selector(LadderController.fetchSongsSelector), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
         
