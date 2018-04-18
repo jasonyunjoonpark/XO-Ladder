@@ -28,6 +28,7 @@ class VoteController: UIViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButtonDisabledView: UIView!
     
     @IBOutlet weak var topVotedView: UIView!
     @IBOutlet weak var topVotedViewSongLabel: UILabel!
@@ -41,10 +42,15 @@ class VoteController: UIViewController {
     @IBAction func nextButtonClicked(_ sender: Any) {
         generateNewSongPair()
         
+        //Update top & bottom views UI
         self.firstSongLabel.isHidden = false
         topVotedView.isHidden = true
         self.secondSongLabel.isHidden = false
         bottomVotedView.isHidden = true
+        
+        //Update next button UI
+        self.nextButtonDisabledView.isHidden = false
+        self.nextButton.isHidden = true
         
     }
     
@@ -53,8 +59,7 @@ class VoteController: UIViewController {
         super.viewDidLoad()
         
         //Setup intial next button
-        nextButton.isEnabled = true
-        nextButton.titleLabel?.text = "Or"
+        nextButton.isHidden = true
         
         //Check if user is signed into Firebase
         if let uid = Auth.auth().currentUser?.uid {
@@ -85,7 +90,7 @@ class VoteController: UIViewController {
             self.secondSong.elo = tuple.newSongRatingTwo
             self.secondSong.losses! += 1
             
-            //Update UI after clicked
+            //Update Top & Bottom Views UI after clicked
             self.firstSongLabel.isHidden = true
             self.topVotedView.isHidden = false
             self.topVotedViewSongLabel.text = self.firstSongName
@@ -96,8 +101,10 @@ class VoteController: UIViewController {
             self.bottomVotedViewSongLabel.text = self.secondSongName
             self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
             
-            print(self.firstSong.name!, self.firstSong.wins!, self.firstSong.losses!)
-            print(self.secondSong.name!, self.secondSong.wins!, self.secondSong.losses!)
+            //Update Next Button UI
+            self.nextButton.isHidden = false
+            self.nextButtonDisabledView.isHidden = true
+            
         }
         
     }
@@ -131,8 +138,10 @@ class VoteController: UIViewController {
             self.bottomVotedViewSongLabel.text = self.secondSongName
             self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
             
-            print(self.firstSong.name!, self.firstSong.wins!, self.firstSong.losses!)
-            print(self.secondSong.name!, self.secondSong.wins!, self.secondSong.losses!)
+            //Update Next Button UI
+            self.nextButton.isHidden = false
+            self.nextButtonDisabledView.isHidden = true
+
             
         }
     }
