@@ -87,6 +87,14 @@ extension VoteController {
         var newSongRatingOne = Int(songRatingOne + ( kFactorOne * (sOne - expectedScoreRatingOne)))
         var newSongRatingTwo = Int(songRatingTwo + ( kFactorTwo * (sTwo - expectedScoreRatingTwo)))
         
+        if newSongRatingOne < 0 {
+            newSongRatingOne = 0
+        }
+        
+        if newSongRatingTwo < 0 {
+            newSongRatingTwo = 0
+        }
+        
         return (newSongRatingOne, newSongRatingTwo)
     }
     

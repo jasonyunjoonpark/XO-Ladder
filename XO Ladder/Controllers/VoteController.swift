@@ -32,14 +32,19 @@ class VoteController: UIViewController {
     
     @IBOutlet weak var topVotedView: UIView!
     @IBOutlet weak var topVotedViewSongLabel: UILabel!
-    @IBOutlet weak var topVotedViewEloNumberLabel: UILabel!
+    @IBOutlet weak var topVotedViewEloNumberLabel: CountingLabel!
+    @IBOutlet weak var topVotedEloGainLabel: CountingLabel!
+    @IBOutlet weak var topVotedGainLossTextLabel: UILabel!
     
     @IBOutlet weak var bottomVotedView: UIView!
     @IBOutlet weak var bottomVotedViewSongLabel: UILabel!
-    @IBOutlet weak var bottomVotedViewEloNumberLabel: UILabel!
+    @IBOutlet weak var bottomVotedEloGainLabel: CountingLabel!
+    @IBOutlet weak var bottomVotedViewEloNumberLabel: CountingLabel!
+    @IBOutlet weak var bottomVotedGainLossTextLabel: UILabel!
     
     //MARK: IBActions
     @IBAction func nextButtonClicked(_ sender: Any) {
+        
         generateNewSongPair()
         
         //Update top & bottom views UI
@@ -91,17 +96,31 @@ class VoteController: UIViewController {
                 //Update both songs' data in Firebase
                 self.updateBothSongsDataOnFirebase {
                     //Update Top & Bottom Views UI after clicked
+                    
+                    //Top voted view update UI
                     self.firstSongLabel.isHidden = true
                     self.topVotedView.isHidden = false
                     self.topVotedViewSongLabel.text = self.firstSongName
-                    self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
+
+                    self.topVotedEloGainLabel.text = "0"
+                    self.topVotedEloGainLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
+                    self.topVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.firstSong.elo! - self.firstSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
+
                     self.topVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
+                    self.topVotedViewEloNumberLabel.count(fromValue: Float(self.firstSong.intialElo!), to: Float(self.firstSong.elo!), withDuration: 2, andAnimationType: .EaseOut, andCounterType: .Int)
                     
+                    //Bottom voted voted view update UI
                     self.secondSongLabel.isHidden = true
                     self.bottomVotedView.isHidden = false
                     self.bottomVotedViewSongLabel.text = self.secondSongName
-                    self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
+                    
+                    self.bottomVotedEloGainLabel.text = "0"
+                    self.bottomVotedEloGainLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
+                    self.bottomVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.secondSong.elo! - self.secondSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
+                    
                     self.bottomVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
+                    self.bottomVotedViewEloNumberLabel.count(fromValue: Float(self.secondSong.intialElo!), to: Float(self.secondSong.elo!), withDuration: 2, andAnimationType: .EaseOut, andCounterType: .Int)
+                    
                     
                     //Update Next Button UI
                     self.nextButton.isHidden = false
@@ -131,17 +150,32 @@ class VoteController: UIViewController {
                 //Update both songs' data in Firebase
                 self.updateBothSongsDataOnFirebase {
                     //Update UI after clicked
+                    
+                    //Top voted view update UI
                     self.firstSongLabel.isHidden = true
                     self.topVotedView.isHidden = false
                     self.topVotedViewSongLabel.text = self.firstSongName
-                    self.topVotedViewEloNumberLabel.text = "\(self.firstSong.elo!)"
-                    self.topVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
                     
+                    self.topVotedEloGainLabel.text = "0"
+                    self.topVotedEloGainLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
+                    self.topVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.firstSong.elo! - self.firstSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
+                    
+                    self.topVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
+                    self.topVotedViewEloNumberLabel.count(fromValue: Float(self.firstSong.intialElo!), to: Float(self.firstSong.elo!), withDuration: 2, andAnimationType: .EaseOut, andCounterType: .Int)
+                    
+                    
+                    
+                    //Bottom voted voted view update UI
                     self.secondSongLabel.isHidden = true
                     self.bottomVotedView.isHidden = false
                     self.bottomVotedViewSongLabel.text = self.secondSongName
-                    self.bottomVotedViewEloNumberLabel.text = "\(self.secondSong.elo!)"
+                    
+                    self.bottomVotedEloGainLabel.text = "0"
+                    self.bottomVotedEloGainLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
+                    self.bottomVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.secondSong.elo! - self.secondSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
+                    
                     self.bottomVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
+                    self.bottomVotedViewEloNumberLabel.count(fromValue: Float(self.secondSong.intialElo!), to: Float(self.secondSong.elo!), withDuration: 2, andAnimationType: .EaseOut, andCounterType: .Int)
                     
                     //Update Next Button UI
                     self.nextButton.isHidden = false
@@ -177,6 +211,7 @@ class VoteController: UIViewController {
             //Cast Firebase data snapshot as dictionary
             if let firstSongDictionary = snapshot.value as? [String: AnyObject] {
                 self.firstSong.name = firstSongDictionary["name"] as! String
+                self.firstSong.intialElo = firstSongDictionary["elo"] as! Int
                 self.firstSong.elo = firstSongDictionary["elo"] as! Int
                 self.firstSong.wins = firstSongDictionary["wins"] as! Int
                 self.firstSong.losses = firstSongDictionary["losses"] as! Int
@@ -186,6 +221,7 @@ class VoteController: UIViewController {
                     //Cast Firebase data snapshot as dictionary
                     if let secondSongDictionary = snapshot.value as? [String: AnyObject] {
                         self.secondSong.name = secondSongDictionary["name"] as! String
+                        self.secondSong.intialElo = secondSongDictionary["elo"] as! Int
                         self.secondSong.elo = secondSongDictionary["elo"] as! Int
                         self.secondSong.wins = secondSongDictionary["wins"] as! Int
                         self.secondSong.losses = secondSongDictionary["losses"] as! Int

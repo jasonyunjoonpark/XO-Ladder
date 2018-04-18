@@ -15,5 +15,5 @@ class Song {
     var wins: Int?
     var losses: Int?
     var ratio: String?
-    
+    var intialElo: Int?
 }
