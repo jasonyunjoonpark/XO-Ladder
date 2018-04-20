@@ -35,12 +35,14 @@ class VoteController: UIViewController {
     @IBOutlet weak var topVotedViewEloNumberLabel: CountingLabel!
     @IBOutlet weak var topVotedEloGainLabel: CountingLabel!
     @IBOutlet weak var topVotedGainLossTextLabel: UILabel!
+    @IBOutlet weak var topVotedWinLossLabel: UILabel!
     
     @IBOutlet weak var bottomVotedView: UIView!
     @IBOutlet weak var bottomVotedViewSongLabel: UILabel!
     @IBOutlet weak var bottomVotedEloGainLabel: CountingLabel!
     @IBOutlet weak var bottomVotedViewEloNumberLabel: CountingLabel!
     @IBOutlet weak var bottomVotedGainLossTextLabel: UILabel!
+    @IBOutlet weak var bottomVotedWinLossLabel: UILabel!
     
     //MARK: IBActions
     @IBAction func nextButtonClicked(_ sender: Any) {
@@ -101,11 +103,14 @@ class VoteController: UIViewController {
                     self.firstSongLabel.isHidden = true
                     self.topVotedView.isHidden = false
                     self.topVotedViewSongLabel.text = self.firstSongName
+                    
+                    self.topVotedWinLossLabel.text = "\(self.firstSong.wins!) / \(self.firstSong.losses!)"
 
+                    self.topVotedGainLossTextLabel.text = "Gain"
                     self.topVotedEloGainLabel.text = "0"
                     self.topVotedEloGainLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
                     self.topVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.firstSong.elo! - self.firstSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
-
+                    
                     self.topVotedViewEloNumberLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
                     self.topVotedViewEloNumberLabel.count(fromValue: Float(self.firstSong.intialElo!), to: Float(self.firstSong.elo!), withDuration: 2, andAnimationType: .EaseOut, andCounterType: .Int)
                     
@@ -114,6 +119,9 @@ class VoteController: UIViewController {
                     self.bottomVotedView.isHidden = false
                     self.bottomVotedViewSongLabel.text = self.secondSongName
                     
+                    self.bottomVotedWinLossLabel.text = "\(self.secondSong.wins!)/\(self.secondSong.losses!)"
+                    
+                    self.bottomVotedGainLossTextLabel.text = "Loss"
                     self.bottomVotedEloGainLabel.text = "0"
                     self.bottomVotedEloGainLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
                     self.bottomVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.secondSong.elo! - self.secondSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
@@ -156,6 +164,9 @@ class VoteController: UIViewController {
                     self.topVotedView.isHidden = false
                     self.topVotedViewSongLabel.text = self.firstSongName
                     
+                    self.topVotedWinLossLabel.text = "\(self.firstSong.wins!)/\(self.firstSong.losses!)"
+                    
+                    self.topVotedGainLossTextLabel.text = "Loss"
                     self.topVotedEloGainLabel.text = "0"
                     self.topVotedEloGainLabel.textColor = UIColor(displayP3Red: 255/255, green: 38/255, blue: 0/255, alpha: 1)
                     self.topVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.firstSong.elo! - self.firstSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
@@ -170,6 +181,9 @@ class VoteController: UIViewController {
                     self.bottomVotedView.isHidden = false
                     self.bottomVotedViewSongLabel.text = self.secondSongName
                     
+                    self.bottomVotedWinLossLabel.text = "\(self.secondSong.wins!)/\(self.secondSong.losses!)"
+                    
+                    self.bottomVotedGainLossTextLabel.text = "Gain"
                     self.bottomVotedEloGainLabel.text = "0"
                     self.bottomVotedEloGainLabel.textColor = UIColor(displayP3Red: 0/255, green: 143/255, blue: 0/255, alpha: 1)
                     self.bottomVotedEloGainLabel.count(fromValue: Float(0), to: Float((abs(self.secondSong.elo! - self.secondSong.intialElo!))), withDuration: 1, andAnimationType: .EaseOut, andCounterType: .Int)
