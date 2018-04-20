@@ -46,6 +46,8 @@ class LadderController: UIViewController {
 
     @objc func fetchSongsSelector() {
         self.songs = []
+        self.tableView.reloadData()
+
         fetchSongs {
             self.refresher.endRefreshing()
         }
@@ -155,6 +157,7 @@ extension LadderController: UITableViewDelegate, UITableViewDataSource {
         return songs.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         
@@ -178,4 +181,5 @@ extension LadderController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
 
