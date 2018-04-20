@@ -40,7 +40,7 @@ class LadderController: UIViewController {
         
         //Fetch data & populate cells
         fetchSongs {
-            
+            self.tableView.reloadData()
         }
     }
 

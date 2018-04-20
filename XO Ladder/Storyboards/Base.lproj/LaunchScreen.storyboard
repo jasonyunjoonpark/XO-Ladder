@@ -28,10 +28,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <visualEffectView opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfW-iQ-8pP">
+                                    <visualEffectView opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfW-iQ-8pP">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="9BS-fH-L9Q">
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9BS-fH-L9Q">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
@@ -39,6 +38,12 @@
                                     </visualEffectView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="PfW-iQ-8pP" firstAttribute="top" secondItem="LCs-2N-GnK" secondAttribute="top" id="GKH-2o-mEs"/>
+                                    <constraint firstItem="PfW-iQ-8pP" firstAttribute="leading" secondItem="LCs-2N-GnK" secondAttribute="leading" id="Kgn-3i-ptq"/>
+                                    <constraint firstAttribute="trailing" secondItem="PfW-iQ-8pP" secondAttribute="trailing" id="Wy1-NS-HLc"/>
+                                    <constraint firstAttribute="bottom" secondItem="PfW-iQ-8pP" secondAttribute="bottom" id="ysh-Kf-k62"/>
+                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="o1U-ak-bkx">
                                 <rect key="frame" x="142" y="377" width="90" height="57"/>
