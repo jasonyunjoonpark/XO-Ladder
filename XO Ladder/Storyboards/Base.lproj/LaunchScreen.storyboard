@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <visualEffectView opaque="NO" alpha="0.65000000000000002" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfW-iQ-8pP">
+                                    <visualEffectView opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfW-iQ-8pP">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="9BS-fH-L9Q">
