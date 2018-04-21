@@ -22,6 +22,9 @@ class LadderController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Set Firebase reference
+        ref = Database.database().reference()
+
         //Add refresh control
         refresher = UIRefreshControl()
         refresher.tintColor = .white
@@ -33,9 +36,6 @@ class LadderController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        //Set Firebase reference
-        ref = Database.database().reference()
-
         //Fetch data & populate cells
         DispatchQueue.main.async {
             self.fetchSongs {
