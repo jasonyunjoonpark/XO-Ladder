@@ -33,20 +33,20 @@ class LadderController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        //Check if user is signed into Firebase
-        if let uid = Auth.auth().currentUser?.uid {
-            ref = Database.database().reference()
-        }
-        
+        //Set Firebase reference
+        ref = Database.database().reference()
+
         //Fetch data & populate cells
-        fetchSongs {
-            self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.fetchSongs {
+                self.tableView.reloadData()
+            }
         }
+
     }
 
     @objc func fetchSongsSelector() {
         self.songs = []
-        self.tableView.reloadData()
 
         fetchSongs {
             self.refresher.endRefreshing()
@@ -156,7 +156,6 @@ extension LadderController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
