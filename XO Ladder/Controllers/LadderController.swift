@@ -21,6 +21,7 @@ class LadderController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         fetchSongsSelector()
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,6 +179,12 @@ extension LadderController: UITableViewDelegate, UITableViewDataSource {
         
         let eloLabel = cell?.viewWithTag(4) as? UILabel
         eloLabel?.text = "\(songs[indexPath.row].elo ?? 0)"
+        
+        if indexPath.row % 2 == 0 {
+            cell?.backgroundColor = UIColor(displayP3Red: 118/255, green: 214/255, blue: 255/255, alpha: 1)
+        } else {
+            cell?.backgroundColor = UIColor(displayP3Red: 255/255, green: 126/255, blue: 121/255, alpha: 1)
+        }
         
         return cell!
     }
