@@ -19,6 +19,9 @@ class LadderController: UIViewController {
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchSongsSelector()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,12 +39,12 @@ class LadderController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        //Fetch data & populate cells
-        DispatchQueue.main.async {
-            self.fetchSongs {
-                self.tableView.reloadData()
-            }
-        }
+//        //Fetch data & populate cells
+//        DispatchQueue.main.async {
+//            self.fetchSongs {
+//                self.tableView.reloadData()
+//            }
+//        }
 
     }
 
