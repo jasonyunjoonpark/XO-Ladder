@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>375497641385-qhrdkchhaqg2a2v01qbv5sdlj3373p96.apps.googleusercontent.com</string>
+	<string>375497641385-lj8f7ec3bn7mhd9do1lomo2p0ck6rbkj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.375497641385-qhrdkchhaqg2a2v01qbv5sdlj3373p96</string>
+	<string>com.googleusercontent.apps.375497641385-lj8f7ec3bn7mhd9do1lomo2p0ck6rbkj</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDDxDv2rVEiSH96gCChUuCmr8q516iYBKY</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,24 +17,24 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.jasonpark.XO-Ladder</string>
+	<string>com.jasonpark.XOLadder</string>
 	<key>PROJECT_ID</key>
 	<string>xo-ladder</string>
 	<key>STORAGE_BUCKET</key>
 	<string>xo-ladder.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:375497641385:ios:8c7b0fa8fb155e15</string>
+	<string>1:375497641385:ios:e94368fe35ad905b</string>
 	<key>DATABASE_URL</key>
-	<string>https://xo-ladder.firebaseio.com</string>
+	<string></string>
 </dict>
 </plist>

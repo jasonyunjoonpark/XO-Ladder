@@ -20,8 +20,12 @@ class LadderController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchSongsSelector()
-        
+        self.songs = []
+        fetchSongs {
+                print("fetch complete!")
+        }
+
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +54,14 @@ class LadderController: UIViewController {
     }
 
     @objc func fetchSongsSelector() {
+        
         self.songs = []
 
         fetchSongs {
-            self.refresher.endRefreshing()
+                self.refresher.endRefreshing()
         }
+
+
     }
     
     //MARK: Functions
@@ -167,18 +174,26 @@ extension LadderController: UITableViewDelegate, UITableViewDataSource {
         let rankLabel = cell?.viewWithTag(-1) as? UILabel
         rankLabel?.text = "\(Int(indexPath.row) + 1)"
         
-        let songLabel = cell?.viewWithTag(1) as? UILabel
-        songLabel?.text = songs[indexPath.row].name
+        if let songLabel = cell?.viewWithTag(1) as? UILabel {
+            songLabel.text = songs[indexPath.row].name
+        }
+
         
-        let winLossLabel = cell?.viewWithTag(2) as? UILabel
-        let winLossText = "\(songs[indexPath.row].wins ?? 0)/\(songs[indexPath.row].losses ?? 0)"
-        winLossLabel?.text = winLossText
+        if let winLossLabel = cell?.viewWithTag(2) as? UILabel {
+            let winLossText = "\(songs[indexPath.row].wins ?? 0)/\(songs[indexPath.row].losses ?? 0)"
+            winLossLabel.text = winLossText
+        }
+
         
-        let ratioLabel = cell?.viewWithTag(3) as? UILabel
-        ratioLabel?.text = songs[indexPath.row].ratio
+        if let ratioLabel = cell?.viewWithTag(3) as? UILabel {
+            ratioLabel.text = songs[indexPath.row].ratio
+        }
+
         
-        let eloLabel = cell?.viewWithTag(4) as? UILabel
-        eloLabel?.text = "\(songs[indexPath.row].elo ?? 0)"
+        if let eloLabel = cell?.viewWithTag(4) as? UILabel {
+            eloLabel.text = "\(songs[indexPath.row].elo ?? 0)"
+        }
+
         
         if indexPath.row % 2 == 0 {
             cell?.backgroundColor = UIColor(displayP3Red: 118/255, green: 214/255, blue: 255/255, alpha: 1)
