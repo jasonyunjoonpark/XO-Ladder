@@ -6,4 +6,4 @@ XO Ladder allows fans of The Weeknd to see live rankings for all songs by The We
 ![screen shot 2018-05-02 at 4 57 17 pm](https://user-images.githubusercontent.com/34497076/39548875-e65d64f0-4e29-11e8-808c-bb74c3402e72.png)
 
 # License
-This project is licensed under the Apache 2.0 License - see the LICENSE.md file for details
+XO-Ladder for iOS is licensed under the MIT License - see the LICENSE.md file for details
