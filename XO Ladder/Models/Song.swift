@@ -9,7 +9,6 @@
 import UIKit
 
 class Song {
-    
     var name: String?
     var elo: Int?
     var wins: Int?

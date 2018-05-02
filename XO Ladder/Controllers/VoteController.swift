@@ -325,8 +325,6 @@ class VoteController: UIViewController {
         }
     }
 
-    
-    
 }
 
 

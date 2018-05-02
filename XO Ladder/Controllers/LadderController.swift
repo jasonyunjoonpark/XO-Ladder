@@ -44,13 +44,6 @@ class LadderController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-//        //Fetch data & populate cells
-//        DispatchQueue.main.async {
-//            self.fetchSongs {
-//                self.tableView.reloadData()
-//            }
-//        }
-
     }
 
     @objc func fetchSongsSelector() {
@@ -109,53 +102,6 @@ class LadderController: UIViewController {
                     }
                 }
                 completed()
-            }
-        })
-    }
-
-    @objc func fetchSongs2() {
-        ref?.child("songs").observe(.childAdded, with: { (snapshot) in
-            
-            //Cast Firebase data snapshot as dictionary
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                let song = Song()
-                var ratio: String?
-                
-                //Store each song's data into Song model
-                song.name = dictionary["name"] as? String
-                song.elo = dictionary["elo"] as? Int
-                song.wins = dictionary["wins"] as? Int
-                song.losses = dictionary["losses"] as? Int
-                
-                if song.losses! != 0 && song.wins! == 0 {
-                    ratio = "0%"
-                }
-                
-                if song.losses! == 0 && song.wins! == 0{
-                    ratio = "n/a"
-                }
-                
-                if song.losses! == 0 && song.wins! != 0 {
-                    ratio = "100%"
-                }
-                    
-                if song.losses! != 0 && song.wins! != 0 {
-                    let ratioCalculation = (Double(song.wins!)/((Double(song.wins!)) + (Double(song.losses!))) * 100)
-                    let roundedRatioCalculation = Int(round(ratioCalculation))
-                    ratio = "\(roundedRatioCalculation)%"
-                }
-                
-                song.ratio = ratio
-                
-                //Add each song to songs array
-                self.songs.append(song)
-                
-                DispatchQueue.main.async {
-                    //Sort posts array by elo
-                    self.songs.sort{ $0.elo! > $1.elo! }
-                    //Reload table view cells
-                    self.tableView.reloadData()
-                }
             }
         })
     }
